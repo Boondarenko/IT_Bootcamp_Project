@@ -1,0 +1,35 @@
+@import 'bootstrap/scss/bootstrap';
+
+.btn-scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  border: none;
+}
+
+.btn-scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-primary {
+  border-radius: 50%;
+  padding: 12px;
+}
+
+.bi-arrow-up {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
