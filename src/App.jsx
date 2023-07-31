@@ -11,9 +11,9 @@ import "./styles/main.scss";
 function App() {
    const [characters, setCharacters] = useState([]);
    const [page, setPage] = useState(1);
-   const [selectedCharacter, setSelectedCharacter] = useState(null);
    const [loading, setLoading] = useState(true);
    const [isLoadingMore, setIsLoadingMore] = useState(false);
+   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
    const fetchCharacters = async (page) => {
       try {
@@ -86,17 +86,16 @@ function App() {
                <Spinner animation="border" variant="primary" />
             </div>
          )}
-         {selectedCharacter && (
-            <CharacterModal
-               character={selectedCharacter}
-               onClose={handleCloseModal}
-            />
-         )}
          <InfiniteScrollLoader
             isLoading={isLoadingMore}
             onLoadMore={loadMoreCharacters}
          />
          <ScrollToTopButton />
+
+         <CharacterModal
+            character={selectedCharacter}
+            onClose={handleCloseModal}
+         />
       </div>
    );
 }

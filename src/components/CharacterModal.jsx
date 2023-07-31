@@ -1,28 +1,36 @@
 import PropTypes from "prop-types";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 
 const CharacterModal = ({ character, onClose }) => {
    return (
-      <div className="modal" tabIndex="-1" style={{ display: "block" }}>
-         <div className="modal-dialog">
-            <div className="modal-content">
-               <div className="modal-header">
-                  <h5 className="modal-title">{character.name}</h5>
-                  <button
-                     type="button"
-                     className="btn-close"
-                     onClick={onClose}
-                  />
-               </div>
-               <div className="modal-body">
-                  <p>Gender: {character.gender}</p>
-                  <p>Status: {character.status}</p>
-                  <p>Race: {character.species}</p>
-                  <p>Origin: {character.origin.name}</p>
-                  <p>First Episode: {character.episode[0]}</p>
-               </div>
-            </div>
-         </div>
-      </div>
+      <Modal show={character !== null} onHide={onClose} centered>
+         <Modal.Header closeButton>
+            <Modal.Title>{character?.name}</Modal.Title>
+         </Modal.Header>
+         <Modal.Body>
+            {character ? (
+               <Row>
+                  <Col xs={12} md={6} className="character-image">
+                     <img src={character.image} alt={character.name} />
+                  </Col>
+                  <Col xs={12} md={6} className="character-info">
+                     <p>Gender: {character.gender}</p>
+                     <p>Status: {character.status}</p>
+                     <p>Race: {character.species}</p>
+                     <p>Origin: {character.origin.name}</p>
+                     <p>First Episode: {character.episode[0]}</p>
+                  </Col>
+               </Row>
+            ) : (
+               <p>No character selected.</p>
+            )}
+         </Modal.Body>
+         <Modal.Footer>
+            <Button variant="secondary" onClick={onClose}>
+               Close
+            </Button>
+         </Modal.Footer>
+      </Modal>
    );
 };
 
@@ -36,7 +44,8 @@ CharacterModal.propTypes = {
          name: PropTypes.string.isRequired,
       }).isRequired,
       episode: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-   }).isRequired,
+      image: PropTypes.string.isRequired,
+   }),
    onClose: PropTypes.func.isRequired,
 };
 
